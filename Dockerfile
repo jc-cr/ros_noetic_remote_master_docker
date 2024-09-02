@@ -4,6 +4,7 @@ FROM osrf/ros:noetic-desktop-focal
 # Install RViz and necessary packages for software rendering and debugging
 RUN apt-get update && apt-get install -y \
     ros-noetic-rviz \
+    ros-${ROS_DISTRO}-image-transport-plugins \
     libgl1-mesa-dri \
     libglvnd0 \
     libgl1 \
