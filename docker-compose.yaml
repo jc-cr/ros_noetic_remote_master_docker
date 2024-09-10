@@ -17,3 +17,21 @@ services:
       - ${HOME}/.Xauthority:/root/.Xauthority
     stdin_open: true  # docker run -i
     tty: true         # docker run -t
+
+  install_husky_specific_dependencies:
+    build: .
+    image: husky_specific_dependencies
+    network_mode: host
+    environment:
+      - DISPLAY=:0
+      - ROBOT_HOSTNAME=${ROBOT_HOSTNAME}
+      - ROBOT_IP=${ROBOT_IP}
+      - ROS_MASTER_URI=http://${ROBOT_IP}:11311
+      - QT_X11_NO_MITSHM=1
+      - LIBGL_ALWAYS_SOFTWARE=1
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${HOME}/.Xauthority:/root/.Xauthority
+      - ./default.rviz:/opt/ros/noetic/share/rviz/default.rviz
+    stdin_open: true  # docker run -i
+    tty: true         # docker run -t
